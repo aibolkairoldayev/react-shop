@@ -1,0 +1,148 @@
+.sidebar {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+    justify-content: space-between;
+    display: flex;
+    transition: all .6s;
+}
+
+.content {
+    opacity: .8;
+    background-color: black;
+    width: 75%;
+}
+
+.side {
+    width: 35%;
+    background: #fff;
+    width: 25%;
+    padding: 30px;
+    position: relative;
+}
+
+.title {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+}
+
+.items {
+    height: 70vh;
+    overflow-y: auto;
+}
+
+.button {
+    height: 55px;
+    background: #9DD558;
+    border-radius: 18px;
+    width: 80%;
+    border: none;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 20px;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+    margin-top: 20px;
+    &:hover {
+        img {
+            transform:translateX(5px);
+            transition: .3s ease-in-out;
+        }
+    }
+    span {
+        font-size: 16px;
+        line-height: 19px;
+        text-align: center;
+        color: #FFFFFF;
+        margin-right: 5px;
+        align-items: center;
+    }
+    
+}
+
+.cost {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed #000;
+    padding-bottom: 20px;
+    p {
+        margin: 0;
+    }
+}
+
+.nds {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed #000;
+    p {
+        margin: 0;
+    }
+}
+
+.item {
+    background: #FFFFFF;
+    border: 1px solid #520a0a;
+    border-radius: 20px;
+    width: 85%;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    &:hover {
+        opacity: .7;
+    }
+}
+
+.img {
+    img {
+        width: 70px;
+    }
+}
+
+.info {
+    margin: 0 15px;
+    p {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+    }
+    b {
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 17px;
+    }
+}
+
+.btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    :hover {
+        opacity: .9;
+    }
+    img {
+        border-radius: 8px;
+    }
+}
+
+.close {
+    position: absolute;
+    top: 25px;
+    right: 65px;
+    border: none;
+    background: none;
+    img {
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+    }
+}
