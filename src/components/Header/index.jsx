@@ -1,35 +1,40 @@
 import React from "react";
 import s from './Header.module.scss'
+import { AppContext } from "../../App";
+import { Link } from "react-router-dom";
 
-function Header({ setSidebarOpen }) {
+function Header() {
+    const { setSidebarOpen } = React.useContext(AppContext);
     return (
         <header className={s.header}>
             <div className="container">
                 <div className={s.content}>
                     <div className={s.logo}>
-                        <a to="/">
+                        <Link to="/">
                             <img src="img/logo.svg" alt="logo" />
                             <span>React shop</span>
-                        </a>
+                        </Link>
                     </div>
-                    <div className={s.buttons} onClick={() => setSidebarOpen(true)}>
-                        <div className={s.cart}>
-                            <a href="#">
-                                <img src="img/cart-icon.svg" alt="cart" />
-                                <p>5600 тг</p>
-                            </a>
+
+                    <div className={s.buttons} >
+                        <div className={s.cart} onClick={() => setSidebarOpen(true)}>
+
+                            <img src="img/cart-icon.svg" alt="cart" />
+                            <p>5600 тг</p>
+
                         </div>
                         <div className={s.favorites}>
-                            <a href="#">
+                            <Link to="/favorites">
                                 <img src="img/fav-icon.svg" alt="fav" />
-                            </a>
+                            </Link>
                         </div>
                         <div className={s.login}>
-                            <a href="#">
+                            <Link to="/purchases">
                                 <img src="img/login-icon.svg" alt="login" />
-                            </a>
+                            </Link>
                         </div>
                     </div>
+
                 </div>
             </div>
         </header>

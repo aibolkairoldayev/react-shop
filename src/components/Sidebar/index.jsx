@@ -34,7 +34,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                         <b>21 498 kzt </b>
                     </div>
                     <div className={s.nds}>
-                        <p>Налог 5%: </p>
+                        <p>В том числе НДС: </p>
                         <b>1074 kzt </b>
                     </div>
                     <button className={s.button}>

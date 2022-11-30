@@ -1,53 +1,43 @@
 import './App.css';
+import React, { useEffect } from 'react';
 import Header from './components/Header';
-import Item from './components/Item';
 import Sidebar from './components/Sidebar';
-import { useEffect, useState } from 'react';
+import { Link, Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
+import Favorites from './pages/Favorites';
+import Purchases from './pages/Purchases';
+
+export const AppContext = React.createContext({});
 
 function App() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [items, setItems] = useState([]);
-  const [searchValue, setSearchValue] = useState('');
+  const [sidebarOpen, setSidebarOpen] = React.useState(false);
+
+  const [searchValue, setSearchValue] = React.useState('');
 
   const onChangeSearchValue = (event) => {
     setSearchValue(event.target.value)
   }
 
   useEffect(() => {
-    fetch('https://fakestoreapi.com/products')
-      .then(res => res.json())
-      .then(json => setItems(json))
+    setSidebarOpen();
   }, [])
+
+
 
   return (
     <div className="App">
-      <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-      <div className='overlay'>
-        <Header setSidebarOpen={setSidebarOpen} />
-        <hr />
-        <div className='items'>
-          <div className="container">
-            <div className='itemsTop'>
-              <div className="itemsTitle">
-                <h1>{searchValue ? `Поиск по запросу ${searchValue}` : "Все кроссовки"}</h1>
-              </div>
-              <div className="itemsSearch">
-                {searchValue && <img onClick={() => setSearchValue('')} src="img/close-icon.svg" alt="" />}
-                <input onChange={onChangeSearchValue} value={searchValue} type="text" placeholder='Search...' />
-              </div>
-            </div>
-            <div className='itemsBot'>
-              {
-                items
-                  .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
-                  .map(item => (
-                    <Item key={item.id} item={item} />
-                  ))
-              }
-            </div>
-          </div>
+      <AppContext.Provider value={{ setSidebarOpen, searchValue, onChangeSearchValue, setSearchValue }}>
+        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+        <div className='overlay'>
+          <Header />
+          <hr />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/favorites" element={<Favorites />} />
+            <Route path="/purchases" element={<Purchases />} />
+          </Routes>
         </div>
-      </div>
+      </AppContext.Provider>
     </div>
   );
 }
