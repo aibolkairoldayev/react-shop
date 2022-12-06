@@ -1,7 +1,11 @@
 import React from "react";
 import s from './Sidebar.module.scss';
+import { AppContext } from "../../App";
 
 function Sidebar({ sidebarOpen, setSidebarOpen }) {
+
+    const { cartItem } = React.useContext(AppContext);
+    const { setCartItem } = React.useContext(AppContext);
     return (
         <div className={`${s.sidebar}  ${sidebarOpen ? 'open' : 'close'}`}>
             <div className={s.content}>
@@ -15,18 +19,24 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                     Корзина
                 </div>
                 <div className={s.items}>
-                    <div className={s.item}>
-                        <div className={s.img}>
-                            <img src="img/item1.jpg" alt="item" />
-                        </div>
-                        <div className={s.info}>
-                            <p>Мужские Кроссовки Nike Air Max 270</p>
-                            <b>12 999 kzt</b>
-                        </div>
-                        <button className={s.btn}>
-                            <img src="img/cart-btn.svg" alt="btn" />
-                        </button>
-                    </div>
+                    {
+                        cartItem.map(addedItem => (
+                            <div key={addedItem.id} className={s.item}>
+                                <div className={s.img}>
+                                    <img src={addedItem.image} alt="item" />
+                                </div>
+                                <div className={s.info}>
+                                    <p>{addedItem.title}</p>
+                                    <b>{addedItem.price} kzt</b>
+                                </div>
+                                <button className={s.btn} onClick={() => {
+                                    setCartItem(cartItem.filter(obj => obj.id != addedItem.id));
+                                }}>
+                                    <img src="img/close-icon.svg" alt="btn" />
+                                </button>
+                            </div>
+                        ))
+                    }
                 </div>
                 <div className={s.total}>
                     <div className={s.cost}>

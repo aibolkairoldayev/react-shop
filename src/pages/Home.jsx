@@ -10,6 +10,7 @@ function Home() {
     const { searchValue } = React.useContext(AppContext);
     const { setSearchValue } = React.useContext(AppContext);
     const { onChangeSearchValue } = React.useContext(AppContext);
+
     useEffect(() => {
         fetch('https://fakestoreapi.com/products')
             .then(res => res.json())

@@ -11,6 +11,7 @@ export const AppContext = React.createContext({});
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
+  const [cartItem, setCartItem] = React.useState([]);
 
   const [searchValue, setSearchValue] = React.useState('');
 
@@ -26,7 +27,7 @@ function App() {
 
   return (
     <div className="App">
-      <AppContext.Provider value={{ setSidebarOpen, searchValue, onChangeSearchValue, setSearchValue }}>
+      <AppContext.Provider value={{ setSidebarOpen, searchValue, onChangeSearchValue, setSearchValue, cartItem, setCartItem }}>
         <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <div className='overlay'>
           <Header />

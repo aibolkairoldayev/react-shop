@@ -1,13 +1,18 @@
 import React from 'react';
 import s from './Item.module.scss';
+import { AppContext } from '../../App';
 
 function Item({ item }) {
+    const [cartStatus, setCartStatus] = React.useState();
+    const { cartItem } = React.useContext(AppContext);
+    const { setCartItem } = React.useContext(AppContext);
+
     return (
         <div className={s.item}>
             <div className={s.favBtn}>
                 <img src="img/heart-icon.svg" alt="fav" />
             </div>
-            <a href="">
+            <div>
                 <div className={s.img}>
                     <img src={item.image} alt="item" />
                 </div>
@@ -18,12 +23,17 @@ function Item({ item }) {
                         <b>{item.price} kzt</b>
                     </div>
                     <div className={s.cartBtn}>
-                        <button>
-                            <img src="img/cart-btn.svg" alt="" />
+                        <button onClick={() => {
+                            setCartStatus(!cartStatus);
+                            !cartStatus && setCartItem([...cartItem, { id: `${item.id}`, title: `${item.title}`, price: `${item.price}`, image: `${item.image}`, added: true }]);
+                            cartStatus && setCartItem(cartItem.filter(obj => obj.id != item.id))
+                        }} >
+
+                            <img src={!cartItem.find(element => element.id == item.id) ? `img/cart-btn.svg` : 'img/cart-added.svg'} alt="" />
                         </button>
                     </div>
                 </div>
-            </a>
+            </div>
         </div>
     )
 }
