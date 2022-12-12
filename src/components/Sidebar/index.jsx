@@ -5,6 +5,9 @@ import { AppContext } from "../../App";
 function Sidebar({ sidebarOpen, setSidebarOpen }) {
 
     const { cartItem, setCartItem, purchItem, setPurchItem } = React.useContext(AppContext);
+    const sum = cartItem.reduce((sum, obj) => parseInt(obj.price) + sum, 0)
+
+
     return (
         <div className={`${s.sidebar}  ${sidebarOpen ? 'open' : 'close'}`}>
             <div className={s.content}>
@@ -41,12 +44,12 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                     <div className={s.cost}>
                         <p>Итого: </p>
                         <span></span>
-                        <b>21 498 kzt </b>
+                        <b>{sum} kzt </b>
                     </div>
                     <div className={s.nds}>
                         <p>В том числе НДС: </p>
                         <span></span>
-                        <b>1074 kzt </b>
+                        <b>{sum * 0.12} kzt </b>
                     </div>
                     <button className={cartItem.length > 0 ? s.button : s.disabled} onClick={() => {
                         setPurchItem([...cartItem])

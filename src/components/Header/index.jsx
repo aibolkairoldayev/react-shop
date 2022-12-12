@@ -4,7 +4,8 @@ import { AppContext } from "../../App";
 import { Link } from "react-router-dom";
 
 function Header() {
-    const { setSidebarOpen } = React.useContext(AppContext);
+    const { setSidebarOpen, cartItem } = React.useContext(AppContext);
+    const sum = cartItem.reduce((sum, obj) => parseInt(obj.price) + sum, 0)
     return (
         <header className={s.header}>
             <div className="container">
@@ -20,7 +21,7 @@ function Header() {
                         <div className={s.cart} onClick={() => setSidebarOpen(true)}>
 
                             <img src="img/cart-icon.svg" alt="cart" />
-                            <p>5600 тг</p>
+                            <p>{sum} kzt</p>
 
                         </div>
                         <div className={s.favorites}>

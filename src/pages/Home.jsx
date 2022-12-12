@@ -28,7 +28,6 @@ function Home() {
             setIsLoading(false)
         }
     }
-    console.log(items)
 
     React.useEffect(() => {
         fetchGames()
