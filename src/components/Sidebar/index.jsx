@@ -4,8 +4,7 @@ import { AppContext } from "../../App";
 
 function Sidebar({ sidebarOpen, setSidebarOpen }) {
 
-    const { cartItem } = React.useContext(AppContext);
-    const { setCartItem } = React.useContext(AppContext);
+    const { cartItem, setCartItem, purchItem, setPurchItem } = React.useContext(AppContext);
     return (
         <div className={`${s.sidebar}  ${sidebarOpen ? 'open' : 'close'}`}>
             <div className={s.content}>
@@ -41,19 +40,24 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                 <div className={s.total}>
                     <div className={s.cost}>
                         <p>Итого: </p>
+                        <span></span>
                         <b>21 498 kzt </b>
                     </div>
                     <div className={s.nds}>
                         <p>В том числе НДС: </p>
+                        <span></span>
                         <b>1074 kzt </b>
                     </div>
-                    <button className={s.button}>
+                    <button className={cartItem.length > 0 ? s.button : s.disabled} onClick={() => {
+                        setPurchItem([...cartItem])
+                        setCartItem([])
+                    }} >
                         <span>Оформить заказ</span>
                         <img src="img/arrow.svg" alt="arrow" />
                     </button>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

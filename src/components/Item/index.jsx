@@ -1,17 +1,24 @@
 import React from 'react';
 import s from './Item.module.scss';
 import { AppContext } from '../../App';
+import { PageContext } from '../../App';
+
 
 function Item({ item }) {
     const [cartStatus, setCartStatus] = React.useState();
-    const { cartItem } = React.useContext(AppContext);
-    const { setCartItem } = React.useContext(AppContext);
-
+    const [favStatus, setFavStatus] = React.useState();
+    const { cartItem, setCartItem } = React.useContext(AppContext);
+    const { favItem, setFavItem } = React.useContext(PageContext);
     return (
         <div className={s.item}>
-            <div className={s.favBtn}>
-                <img src="img/heart-icon.svg" alt="fav" />
-            </div>
+            <button className={s.favBtn} onClick={() => {
+                setFavStatus(!favStatus);
+                !favStatus && !favItem.find(element => element.id == item.id) && setFavItem([...favItem, { id: `${item.id}`, title: `${item.title}`, price: `${item.price}`, image: `${item.image}` }]);
+                favStatus && setFavItem(favItem.filter(obj => obj.id != item.id));
+
+            }}>
+                <img src={favItem.find(element => element.id == item.id) ? "img/fav-add.svg" : 'img/heart-icon.svg'} alt="fav" />
+            </button>
             <div>
                 <div className={s.img}>
                     <img src={item.image} alt="item" />
@@ -25,7 +32,7 @@ function Item({ item }) {
                     <div className={s.cartBtn}>
                         <button onClick={() => {
                             setCartStatus(!cartStatus);
-                            !cartStatus && setCartItem([...cartItem, { id: `${item.id}`, title: `${item.title}`, price: `${item.price}`, image: `${item.image}`, added: true }]);
+                            !cartStatus && setCartItem([...cartItem, { id: `${item.id}`, title: `${item.title}`, price: `${item.price}`, image: `${item.image}` }]);
                             cartStatus && setCartItem(cartItem.filter(obj => obj.id != item.id))
                         }} >
 
